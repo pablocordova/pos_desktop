@@ -36,6 +36,8 @@ public class ProductosDAO {
                productos.setPrecio20_(rs.getString(8));
                productos.setCantidad(rs.getString(9));
                productos.setInputImagen(rs.getBinaryStream(10));
+               productos.setPrecio4(rs.getString(11));
+               productos.setPrecio5(rs.getString(12));
                listaProductos.add(productos);
            }
        }
@@ -65,6 +67,8 @@ public class ProductosDAO {
                producto.setPrecio20_(rs.getString(8));
                producto.setCantidad(rs.getString(9));
                producto.setInputImagen(rs.getBinaryStream(10));
+               producto.setPrecio4(rs.getString(11));
+               producto.setPrecio5(rs.getString(12));
            }
        }
        catch(Exception e) {
@@ -91,7 +95,7 @@ public class ProductosDAO {
         Connection accesoDB = conexion.getConexion();
         int rs = 0;
         try {
-            PreparedStatement ps = accesoDB.prepareStatement("insert into productos (nombre, marca, categoria, costo, precio1_10, precio10_20, precio20_,cantidad,imagen) values (?,?,?,?,?,?,?,?,?)");
+            PreparedStatement ps = accesoDB.prepareStatement("insert into productos (nombre, marca, categoria, costo, precio1_10, precio10_20, precio20_,cantidad,imagen, precio4, precio5) values (?,?,?,?,?,?,?,?,?,?,?)");
             ps.setString(1, producto.nombre);
             ps.setString(2, producto.marca);
             ps.setString(3, producto.categoria);
@@ -100,6 +104,8 @@ public class ProductosDAO {
             ps.setString(6, producto.precio10_20);
             ps.setString(7, producto.precio20_);
             ps.setString(8, producto.cantidad);
+            ps.setString(10, producto.precio4);
+            ps.setString(11, producto.precio5);
             //ps.setBytes(9, producto.imagen);
             try {
                 //ps.setBinaryStream (9, producto.imagen, (int) producto.fileImagen.length() );
@@ -124,7 +130,7 @@ public class ProductosDAO {
         Connection accesoDB = conexion.getConexion();
         int rs = 0;
         try {
-            PreparedStatement ps = accesoDB.prepareStatement("update productos set nombre=?,marca=?,categoria=?,costo=?,precio1_10=?,precio10_20=?,precio20_=?,cantidad=?,imagen=? where idproductos=?");
+            PreparedStatement ps = accesoDB.prepareStatement("update productos set nombre=?,marca=?,categoria=?,costo=?,precio1_10=?,precio10_20=?,precio20_=?,cantidad=?,imagen=?,precio4=?,precio5=? where idproductos=?");
             ps.setString(1, producto.nombre);
             ps.setString(2, producto.marca);
             ps.setString(3, producto.categoria);
@@ -133,6 +139,8 @@ public class ProductosDAO {
             ps.setString(6, producto.precio10_20);
             ps.setString(7, producto.precio20_);
             ps.setString(8, producto.cantidad);
+            ps.setString(10, producto.precio4);
+            ps.setString(11, producto.precio5);
             try{
                 //ps.setBinaryStream (9, producto.imagen, (int) producto.fileImagen.length() );
                 ps.setBinaryStream(9, producto.inputImagen, producto.inputImagen.available());
@@ -141,7 +149,7 @@ public class ProductosDAO {
                 ps.setBinaryStream (9, null);
                 System.out.println("TODO: Al actualizar tambien tengo que tener la imagen");
             }
-            ps.setInt(10, producto.id);
+            ps.setInt(12, producto.id);
             rs = ps.executeUpdate();
         }
         catch(Exception ex) {

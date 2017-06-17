@@ -101,11 +101,11 @@ public class JFVentasCrear extends javax.swing.JFrame {
 
             },
             new String [] {
-                "id", "Nombre", "Marca", "Categoria", "Stock", "Precio1_10", "Precio10_20", "Precio20_", "Costo"
+                "id", "Nombre", "Marca", "Categoria", "Stock", "Precio1", "Precio2", "Precio3", "Costo", "Precio4", "Precio5"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -122,8 +122,14 @@ public class JFVentasCrear extends javax.swing.JFrame {
         if (tbProductos.getColumnModel().getColumnCount() > 0) {
             tbProductos.getColumnModel().getColumn(0).setMinWidth(0);
             tbProductos.getColumnModel().getColumn(0).setMaxWidth(0);
+            tbProductos.getColumnModel().getColumn(7).setMinWidth(0);
+            tbProductos.getColumnModel().getColumn(7).setMaxWidth(0);
             tbProductos.getColumnModel().getColumn(8).setMinWidth(0);
             tbProductos.getColumnModel().getColumn(8).setMaxWidth(0);
+            tbProductos.getColumnModel().getColumn(9).setMinWidth(0);
+            tbProductos.getColumnModel().getColumn(9).setMaxWidth(0);
+            tbProductos.getColumnModel().getColumn(10).setMinWidth(0);
+            tbProductos.getColumnModel().getColumn(10).setMaxWidth(0);
         }
 
         lblCostoProducto.setText("CostoProducto");

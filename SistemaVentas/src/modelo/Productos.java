@@ -14,6 +14,8 @@ public class Productos {
     public String precio1_10;
     public String precio10_20;
     public String precio20_;
+    public String precio4;
+    public String precio5;
     public String cantidad;
     public FileInputStream  imagen;
     public File fileImagen;
@@ -93,6 +95,22 @@ public class Productos {
 
     public void setPrecio20_(String precio20_) {
         this.precio20_ = precio20_;
+    }
+
+    public String getPrecio4() {
+        return precio4;
+    }
+
+    public void setPrecio4(String precio4) {
+        this.precio4 = precio4;
+    }
+
+    public String getPrecio5() {
+        return precio5;
+    }
+
+    public void setPrecio5(String precio5) {
+        this.precio5 = precio5;
     }
 
     public String getCantidad() {

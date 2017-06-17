@@ -65,11 +65,11 @@ public class JFProductos extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Nombre", "Marca", "Categoria", "Costo", "Precio 1-10", "Precio 10-20", "Precio 20+", "Cantidad"
+                "Id", "Nombre", "Marca", "Categoria", "Costo", "Precio 1", "Precio 2", "Precio 3", "Precio 4", "Precio 5", "Cantidad"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

@@ -22,6 +22,7 @@ import vista.JFVentasCrear;
 public class ControladorVentas {
     JFVentas vistaVentas;
     VentasDAO modeloVentas;
+    String permission;
     private TableRowSorter<TableModel> modeloOrdenado;
     
     public ControladorVentas(JFVentas vistaVentas, VentasDAO modeloVentas) {
@@ -58,7 +59,8 @@ public class ControladorVentas {
         });
     }
     
-    public void InicializarVentas() {
+    public void InicializarVentas(String permission) {
+        this.permission = permission;
         ArrayList<Ventas> arrayVentas;
         arrayVentas= modeloVentas.getVentas();
         DefaultTableModel model = (DefaultTableModel) vistaVentas.tbVentas.getModel();
@@ -90,7 +92,17 @@ public class ControladorVentas {
     public void btnCrearActionPerformed(ActionEvent evt) {
         JFVentasCrear vistaVentasCrear= new JFVentasCrear();
         ControladorVentasCrear ventasCrear = new ControladorVentasCrear(modeloVentas, vistaVentasCrear, this);
-        ventasCrear.InicializarVentasCrear();
+        ventasCrear.InicializarVentasCrear(this.permission);
+        if(this.permission.equals("A")) {
+            System.out.println("yessssss");
+            //vistaVentas.btnEliminar.setEnabled(false)
+            vistaVentasCrear.tbProductos.getColumnModel().getColumn(7).setMaxWidth(30);
+            vistaVentasCrear.tbProductos.getColumnModel().getColumn(7).setMinWidth(30);
+            vistaVentasCrear.tbProductos.getColumnModel().getColumn(9).setMaxWidth(30);
+            vistaVentasCrear.tbProductos.getColumnModel().getColumn(9).setMinWidth(30);
+            vistaVentasCrear.tbProductos.getColumnModel().getColumn(10).setMaxWidth(30);
+            vistaVentasCrear.tbProductos.getColumnModel().getColumn(10).setMinWidth(30);
+        }
         vistaVentasCrear.setVisible(true);
         vistaVentasCrear.setLocationRelativeTo(null);
     }

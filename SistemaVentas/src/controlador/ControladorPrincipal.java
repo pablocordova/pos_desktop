@@ -95,7 +95,7 @@ public class ControladorPrincipal{
         if(this.permission.equals("V")) {
             vistaVentas.btnEliminar.setEnabled(false);
         }
-        ventas.InicializarVentas();
+        ventas.InicializarVentas(this.permission);
     }
     
     public void btnInventarioActionPerformed(ActionEvent evt) {

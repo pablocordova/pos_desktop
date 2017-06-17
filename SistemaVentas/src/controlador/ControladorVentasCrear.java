@@ -19,6 +19,7 @@ public class ControladorVentasCrear {
     VentasDAO modeloVentas;
     JFVentasCrear vistaVentasCrear;
     ControladorVentas controladorVentas;
+    String permission;
     private TableRowSorter<TableModel> modeloOrdenado;
     
     public  ControladorVentasCrear(VentasDAO modeloVentas, JFVentasCrear vistaVentasCrear, ControladorVentas controladorVentas) {
@@ -96,14 +97,15 @@ public class ControladorVentasCrear {
         });
         
     }
-    public void InicializarVentasCrear() {
+    public void InicializarVentasCrear(String permission) {
+        this.permission = permission;
         // Rellenar la tabla Productos con todos los productos
         ProductosDAO modeloProductos = new ProductosDAO();
         ArrayList<Productos> arrayProductos;
         arrayProductos = modeloProductos.getProductos();
         DefaultTableModel model = (DefaultTableModel) vistaVentasCrear.tbProductos.getModel();
         for (int i = 0; i < arrayProductos.size(); i++) {
-            model.addRow(new Object[]{arrayProductos.get(i).id, arrayProductos.get(i).nombre, arrayProductos.get(i).marca, arrayProductos.get(i).categoria, arrayProductos.get(i).cantidad, arrayProductos.get(i).precio1_10, arrayProductos.get(i).precio10_20, arrayProductos.get(i).precio20_, arrayProductos.get(i).costo});
+            model.addRow(new Object[]{arrayProductos.get(i).id, arrayProductos.get(i).nombre, arrayProductos.get(i).marca, arrayProductos.get(i).categoria, arrayProductos.get(i).cantidad, arrayProductos.get(i).precio1_10, arrayProductos.get(i).precio10_20, arrayProductos.get(i).precio20_, arrayProductos.get(i).costo, arrayProductos.get(i).precio4, arrayProductos.get(i).precio5});
         }
         // Para desactivar el movimiento hacia abajo cuando se da enter dentro de la tabla
         createKeybindings(vistaVentasCrear.tbProductos);
@@ -191,7 +193,7 @@ public class ControladorVentasCrear {
         ///----------- 
         vistaVentasCrear.dispose();
         controladorVentas.limpiaTabla();
-        controladorVentas.InicializarVentas();
+        controladorVentas.InicializarVentas(this.permission);
     }
     public void btnCancelarActionPerformed(ActionEvent evt) {
         vistaVentasCrear.dispose();
@@ -218,8 +220,10 @@ public class ControladorVentasCrear {
     }
     
     private void createKeybindings(JTable table) {
+        final String per = this.permission;
     table.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "Enter");
         table.getActionMap().put("Enter", new AbstractAction() {
+            
             @Override
             public void actionPerformed(ActionEvent ae) {
                 // limpiar el combobox de precios
@@ -240,8 +244,11 @@ public class ControladorVentasCrear {
                 vistaVentasCrear.lblCostoProducto.setText((String) model.getValueAt(realRow, 8));
                 vistaVentasCrear.cbPrecio.addItem((String) model.getValueAt(realRow, 5));
                 vistaVentasCrear.cbPrecio.addItem((String) model.getValueAt(realRow, 6));
-                vistaVentasCrear.cbPrecio.addItem((String) model.getValueAt(realRow, 7));
-                
+                if(per.equals("A")) {
+                    vistaVentasCrear.cbPrecio.addItem((String) model.getValueAt(realRow, 7));
+                    vistaVentasCrear.cbPrecio.addItem((String) model.getValueAt(realRow, 9));
+                    vistaVentasCrear.cbPrecio.addItem((String) model.getValueAt(realRow, 10));
+                }
                 vistaVentasCrear.txtCantidad.requestFocusInWindow();
             }
         });

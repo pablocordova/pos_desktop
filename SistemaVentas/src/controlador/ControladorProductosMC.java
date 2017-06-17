@@ -72,6 +72,8 @@ public class ControladorProductosMC {
             vistaProductosMC.txtPrecio1_10.setText(producto.precio1_10);
             vistaProductosMC.txtPrecio10_20.setText(producto.precio10_20);
             vistaProductosMC.txtPrecio20_.setText(producto.precio20_);
+            vistaProductosMC.txtPrecio4.setText(producto.precio4);
+            vistaProductosMC.txtPrecio5.setText(producto.precio5);
             vistaProductosMC.lblCantidad.setText(producto.cantidad);
             imageInputStream = producto.inputImagen;
             try {
@@ -97,6 +99,8 @@ public class ControladorProductosMC {
         producto.precio1_10 = vistaProductosMC.txtPrecio1_10.getText();
         producto.precio10_20 = vistaProductosMC.txtPrecio10_20.getText();
         producto.precio20_ = vistaProductosMC.txtPrecio20_.getText();
+        producto.precio4 = vistaProductosMC.txtPrecio4.getText();
+        producto.precio5 = vistaProductosMC.txtPrecio5.getText();
         producto.cantidad = vistaProductosMC.lblCantidad.getText();
         
         try {
@@ -104,6 +108,8 @@ public class ControladorProductosMC {
             number = Float.parseFloat(producto.precio10_20);
             number = Float.parseFloat(producto.precio10_20);
             number = Float.parseFloat(producto.precio20_);
+            number = Float.parseFloat(producto.precio4);
+            number = Float.parseFloat(producto.precio5);
             int num = Integer.parseInt(producto.cantidad);
         } catch(Exception ex) {
             JOptionPane.showMessageDialog(null, "Formato de numeros invalido");

@@ -63,7 +63,7 @@ public class ControladorProductos {
         arrayProductos = modeloProductos.getProductos();
         DefaultTableModel model = (DefaultTableModel) vistaProductos.tbProductos.getModel();
         for (int i = 0; i < arrayProductos.size(); i++) {
-            model.addRow(new Object[]{arrayProductos.get(i).id, arrayProductos.get(i).nombre, arrayProductos.get(i).marca, arrayProductos.get(i).categoria, arrayProductos.get(i).costo, arrayProductos.get(i).precio1_10, arrayProductos.get(i).precio10_20, arrayProductos.get(i).precio20_, arrayProductos.get(i).cantidad});
+            model.addRow(new Object[]{arrayProductos.get(i).id, arrayProductos.get(i).nombre, arrayProductos.get(i).marca, arrayProductos.get(i).categoria, arrayProductos.get(i).costo, arrayProductos.get(i).precio1_10, arrayProductos.get(i).precio10_20, arrayProductos.get(i).precio20_, arrayProductos.get(i).precio4, arrayProductos.get(i).precio5, arrayProductos.get(i).cantidad});
         }
     }
     
@@ -140,7 +140,9 @@ public class ControladorProductos {
         producto.setPrecio1_10((String) model.getValueAt(realRow, 5));
         producto.setPrecio10_20((String) model.getValueAt(realRow, 6));
         producto.setPrecio20_((String) model.getValueAt(realRow, 7));
-        producto.setCantidad((String) model.getValueAt(realRow, 8));
+        producto.setPrecio4((String) model.getValueAt(realRow, 8));
+        producto.setPrecio5((String) model.getValueAt(realRow, 9));
+        producto.setCantidad((String) model.getValueAt(realRow, 10));
         producto.setInputImagen(modeloProductos.getImagenProducto(Integer.parseInt(model.getValueAt(realRow, 0).toString())));
         ///-----------
         
