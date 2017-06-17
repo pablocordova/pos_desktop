@@ -88,6 +88,12 @@ public class ControladorVentasCrear {
                 tbProductosMouseClicked(evt);
             }
         });
+        this.vistaVentasCrear.tbVenta.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent evt) {
+                tbVentaKeyReleased(evt);
+            }
+        });
         
     }
     public void InicializarVentasCrear() {
@@ -155,6 +161,7 @@ public class ControladorVentasCrear {
         venta.setIgv(vistaVentasCrear.lblIgv.getText());
         venta.setMonto(totalVentas);
         venta.setGananciaTotal(vistaVentasCrear.lblGananciaTotal.getText());
+        venta.setComentario(vistaVentasCrear.txaComentario.getText());
         
         idVentasGenerado = modeloVentas.crearVenta(venta);
 
@@ -272,7 +279,8 @@ public class ControladorVentasCrear {
                 Float precio = Float.parseFloat(precioOpciones);
                 String totalPrecioProducto = String.valueOf(cantidad*precio);
                 String gananciaProducto = String.valueOf((precio-costo)*cantidad);
-                model.addRow(new Object[]{vistaVentasCrear.lblIdProducto.getText(), vistaVentasCrear.txtProductoSeleccionado.getText(), vistaVentasCrear.txtCantidad.getText(), vistaVentasCrear.cbPrecio.getSelectedItem().toString(), totalPrecioProducto, String.valueOf(vistaVentasCrear.cbPrecio.getSelectedIndex()+1), gananciaProducto});
+                String costoProducto = String.valueOf(costo);
+                model.addRow(new Object[]{vistaVentasCrear.lblIdProducto.getText(), vistaVentasCrear.txtProductoSeleccionado.getText(), vistaVentasCrear.txtCantidad.getText(), vistaVentasCrear.cbPrecio.getSelectedItem().toString(), totalPrecioProducto, String.valueOf(vistaVentasCrear.cbPrecio.getSelectedIndex()+1), gananciaProducto, costoProducto});
                 
                 // Debe recorrer toda la tabla y sumar los totales para luego sacar el subtotal e igv
                 calculosTablaVenta();
@@ -337,6 +345,24 @@ public class ControladorVentasCrear {
     public void tbProductosMouseClicked(MouseEvent evt) {
         //Caso click en la tabl, para mostrar imagen
         mostrarImagen();
+    }
+    
+    public void tbVentaKeyReleased(KeyEvent evt) {
+        // Case enter on the table, I need to modify all results
+        if(evt.getKeyCode() == 10){
+            // Calculate the subtotal and print it.
+            DefaultTableModel model = (DefaultTableModel) vistaVentasCrear.tbVenta.getModel();
+            int selectedRowIndex = vistaVentasCrear.tbVenta.getSelectedRow();
+            float price_product = Float.parseFloat(model.getValueAt(selectedRowIndex, 3).toString());
+            float amount_product = Float.parseFloat(model.getValueAt(selectedRowIndex, 2).toString());
+            float cost_product = Float.parseFloat(model.getValueAt(selectedRowIndex, 7).toString());
+            // Set new total
+            model.setValueAt(String.valueOf(price_product*amount_product), selectedRowIndex, 4);
+            // Set new profit
+            model.setValueAt(String.valueOf((price_product-cost_product)*amount_product), selectedRowIndex, 6);
+            // Calculate and print paramters
+            calculosTablaVenta();
+        }
     }
     
     public void mostrarImagen() {

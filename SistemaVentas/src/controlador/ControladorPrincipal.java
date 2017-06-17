@@ -18,7 +18,7 @@ public class ControladorPrincipal{
     UsuariosDAO modeloPrincipal = new UsuariosDAO();
     JFPrincipal vistaPrincipal = new JFPrincipal();
     Usuarios usuario = new Usuarios();
-    String dni, password;
+    String dni, password, permission;
     
     public ControladorPrincipal(JFPrincipal vistaPrincipal, 
                                 UsuariosDAO modeloPrincipal) {
@@ -62,9 +62,10 @@ public class ControladorPrincipal{
         });
     }
     
-    public void InicializarPrincipal(String dni, String password) {
+    public void InicializarPrincipal(String dni, String password, String permission) {
         this.dni = dni;
         this.password = password;
+        this.permission = permission;
     }
     
     public void btnClientesActionPerformed(ActionEvent evt) {
@@ -91,6 +92,9 @@ public class ControladorPrincipal{
         ControladorVentas ventas = new ControladorVentas(vistaVentas, modeloVentas);
         vistaVentas.setVisible(true);
         vistaVentas.setLocationRelativeTo(null);
+        if(this.permission.equals("V")) {
+            vistaVentas.btnEliminar.setEnabled(false);
+        }
         ventas.InicializarVentas();
     }
     

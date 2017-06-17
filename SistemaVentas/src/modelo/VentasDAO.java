@@ -35,6 +35,7 @@ public class VentasDAO {
                 ventas.setIgv(rs.getString(7));
                 ventas.setMonto(rs.getString(8));
                 ventas.setGananciaTotal(rs.getString(9));
+                ventas.setComentario(rs.getString(10));
                 lasVentasLista.add(ventas);
             }            
         } catch ( Exception e) {
@@ -126,7 +127,7 @@ public class VentasDAO {
         int idVentaGenerado = 0;
         int rs = 0;
         try {
-            PreparedStatement ps = accesoDB.prepareStatement("insert into ventas (idcliente, nombre, fecha, hora, subtotal, igv, monto,gananciatotal) values (?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = accesoDB.prepareStatement("insert into ventas (idcliente, nombre, fecha, hora, subtotal, igv, monto, gananciatotal, comentario) values (?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, venta.idCliente);
             ps.setString(2, venta.nombre);
             ps.setString(3, venta.fecha);
@@ -135,6 +136,7 @@ public class VentasDAO {
             ps.setString(6, venta.igv);
             ps.setString(7, venta.monto);
             ps.setString(8, venta.gananciaTotal);
+            ps.setString(9, venta.comentario);
 
             rs = ps.executeUpdate();
             System.out.println("respuesta: " + rs);

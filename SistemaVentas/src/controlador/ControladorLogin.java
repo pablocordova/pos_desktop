@@ -6,6 +6,7 @@ import modelo.Usuarios;
 import modelo.UsuariosDAO;
 import vista.JFLogin;
 import vista.JFPrincipal;
+import vista.JFVentas;
 
 public class ControladorLogin implements ActionListener{
     // Definir variables
@@ -45,7 +46,7 @@ public class ControladorLogin implements ActionListener{
             JFPrincipal vistaP = new JFPrincipal();
             vistaP.lblUsuario.setText("Bienvenido " + usuario.getNombres());
             ControladorPrincipal controladorP = new ControladorPrincipal(vistaP, modeloLogin);
-            controladorP.InicializarPrincipal(dni, password);
+            controladorP.InicializarPrincipal(dni, password, usuario.privilegios);
             vistaP.setVisible(true);
             //vistaP.setExtendedState(vistaP.getExtendedState() | JFrame.MAXIMIZED_BOTH);
             // Activar botones deacuerdo a prioridad de privilegios (Administrador o vendedor)}

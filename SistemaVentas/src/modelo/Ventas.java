@@ -19,6 +19,8 @@ public class Ventas {
     public String tipoPrecioProducto;
     public String precioProducto;
     public String gananciaProducto;
+    //For comment
+    public String comentario;
     
     public Ventas() {
         
@@ -37,6 +39,8 @@ public class Ventas {
         tipoPrecioProducto = "";
         precioProducto = "";
         gananciaProducto = "";
+        
+        comentario = "";
     }
 
     public int getIdVenta() {
@@ -150,7 +154,13 @@ public class Ventas {
     public void setGananciaProducto(String gananciaProducto) {
         this.gananciaProducto = gananciaProducto;
     }
-    
-    
-    
+
+    public String getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
+    }
+      
 }

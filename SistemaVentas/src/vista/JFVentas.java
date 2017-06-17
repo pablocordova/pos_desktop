@@ -63,11 +63,11 @@ public class JFVentas extends javax.swing.JFrame {
 
             },
             new String [] {
-                "id", "Nombre", "Monto", "Fecha"
+                "id", "Nombre", "Monto", "Fecha", "Hora", "Comentario"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -79,6 +79,12 @@ public class JFVentas extends javax.swing.JFrame {
         if (tbVentas.getColumnModel().getColumnCount() > 0) {
             tbVentas.getColumnModel().getColumn(0).setMinWidth(0);
             tbVentas.getColumnModel().getColumn(0).setMaxWidth(0);
+            tbVentas.getColumnModel().getColumn(2).setMinWidth(60);
+            tbVentas.getColumnModel().getColumn(2).setMaxWidth(60);
+            tbVentas.getColumnModel().getColumn(3).setMinWidth(80);
+            tbVentas.getColumnModel().getColumn(3).setMaxWidth(80);
+            tbVentas.getColumnModel().getColumn(4).setMinWidth(60);
+            tbVentas.getColumnModel().getColumn(4).setMaxWidth(60);
         }
 
         btnCrear.setText("CREAR");

@@ -64,7 +64,7 @@ public class ControladorVentas {
         DefaultTableModel model = (DefaultTableModel) vistaVentas.tbVentas.getModel();
         for (int i = 0; i < arrayVentas.size(); i++) {
             //model.addRow(new Object[]{arrayVentas.get(i).idVenta, arrayVentas.get(i).idCliente, arrayVentas.get(i).nombre, arrayVentas.get(i).fecha, arrayVentas.get(i).hora, arrayVentas.get(i).subtotal, arrayVentas.get(i).igv, arrayVentas.get(i).monto, arrayVentas.get(i).gananciaTotal});
-            model.addRow(new Object[]{arrayVentas.get(i).idVenta, arrayVentas.get(i).nombre, arrayVentas.get(i).monto, arrayVentas.get(i).fecha});
+            model.addRow(new Object[]{arrayVentas.get(i).idVenta, arrayVentas.get(i).nombre, arrayVentas.get(i).monto, arrayVentas.get(i).fecha, arrayVentas.get(i).hora, arrayVentas.get(i).comentario});
         }
         vistaVentas.btnCrear.requestFocusInWindow();
     }

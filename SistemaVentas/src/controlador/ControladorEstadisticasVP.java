@@ -61,9 +61,9 @@ public class ControladorEstadisticasVP {
         ArrayList<Ventas> arrayCantidadPrecio = new ArrayList<Ventas>();
         arrayCantidadPrecio = modeloVentas.getCantPrecioProducto(optionSelected, minIdVentas, maxIdVentas);
         Float sumaTotal = 0f, precio, total;
-        int cantidad;
+        float cantidad;
         for(int i = 0; i < arrayCantidadPrecio.size(); i++ ) {
-            cantidad = Integer.parseInt(arrayCantidadPrecio.get(i).getCantidadProducto());
+            cantidad = Float.parseFloat(arrayCantidadPrecio.get(i).getCantidadProducto());
             precio = Float.parseFloat(arrayCantidadPrecio.get(i).getPrecioProducto());
             total = precio*cantidad;
             sumaTotal = sumaTotal + total;
