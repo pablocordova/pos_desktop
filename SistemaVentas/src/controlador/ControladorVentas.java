@@ -94,14 +94,12 @@ public class ControladorVentas {
         ControladorVentasCrear ventasCrear = new ControladorVentasCrear(modeloVentas, vistaVentasCrear, this);
         ventasCrear.InicializarVentasCrear(this.permission);
         if(this.permission.equals("A")) {
-            System.out.println("yessssss");
-            //vistaVentas.btnEliminar.setEnabled(false)
             vistaVentasCrear.tbProductos.getColumnModel().getColumn(7).setMaxWidth(30);
             vistaVentasCrear.tbProductos.getColumnModel().getColumn(7).setMinWidth(30);
+            vistaVentasCrear.tbProductos.getColumnModel().getColumn(8).setMaxWidth(30);
+            vistaVentasCrear.tbProductos.getColumnModel().getColumn(8).setMinWidth(30);
             vistaVentasCrear.tbProductos.getColumnModel().getColumn(9).setMaxWidth(30);
             vistaVentasCrear.tbProductos.getColumnModel().getColumn(9).setMinWidth(30);
-            vistaVentasCrear.tbProductos.getColumnModel().getColumn(10).setMaxWidth(30);
-            vistaVentasCrear.tbProductos.getColumnModel().getColumn(10).setMinWidth(30);
         }
         vistaVentasCrear.setVisible(true);
         vistaVentasCrear.setLocationRelativeTo(null);

@@ -30,7 +30,8 @@ public class ClientesDAO {
                 clientes.setRuc(rs.getString(7));
                 clientes.setPreciofijo(rs.getString(8));
                 losClientesLista.add(clientes);
-            }            
+            } 
+            accesoDB.close();
         } catch ( Exception e) {
             System.out.println("Error conectando base de datos, ClientesDAO" + e);
         }
@@ -51,6 +52,7 @@ public class ClientesDAO {
             ps.setString(7, cliente.preciofijo);
             rs = ps.executeUpdate();
             System.out.println("respuesta: " + rs);
+            accesoDB.close();
         }
         catch (Exception ex) {
             System.out.println("Problema en base de datos, Crear Cliente : " + ex);
@@ -73,6 +75,7 @@ public class ClientesDAO {
             ps.setString(7, cliente.preciofijo);
             ps.setInt(8, cliente.id);
             rs = ps.executeUpdate();
+            accesoDB.close();
         }
         catch(Exception ex) {
             System.out.println("Problema en base de datos, Actualizar Cliente : " + ex);
@@ -86,6 +89,7 @@ public class ClientesDAO {
           PreparedStatement ps = accesoDB.prepareStatement("delete from clientes where idclientes=?");
           ps.setInt(1, idCliente);
           rs = ps.executeUpdate();
+          accesoDB.close();
         }
         catch(Exception ex) {
             System.out.println("Problema en base de datos, Eliminar Cliente : " + ex);
@@ -110,7 +114,8 @@ public class ClientesDAO {
                 cliente.setTelefono(rs.getString(6));
                 cliente.setRuc(rs.getString(7));
                 cliente.setPreciofijo(rs.getString(8));
-            }            
+            }
+            accesoDB.close();
         } catch ( Exception e) {
             System.out.println("Error conectando base de datos, getCliente" + e);
         }

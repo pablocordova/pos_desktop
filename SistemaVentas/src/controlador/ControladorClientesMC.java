@@ -48,7 +48,7 @@ public class ControladorClientesMC {
             vistaClientesMC.txtDireccion.setText(cliente.direccion);
             vistaClientesMC.txtTelefono.setText(cliente.telefono);
             vistaClientesMC.txtRuc.setText(cliente.ruc);
-            if(cliente.preciofijo != ""){
+            if(cliente.preciofijo != "" && cliente.preciofijo != null){
                 vistaClientesMC.cbPrecioFijo.setSelectedIndex(Integer.parseInt(cliente.preciofijo));
             }
         }

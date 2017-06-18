@@ -22,6 +22,7 @@ public class ControladorVentasCrear {
     JFVentasCrear vistaVentasCrear;
     ControladorVentas controladorVentas;
     String permission;
+    String preciofijo = "Ninguno";
     private TableRowSorter<TableModel> modeloOrdenado;
     
     public  ControladorVentasCrear(VentasDAO modeloVentas, JFVentasCrear vistaVentasCrear, ControladorVentas controladorVentas) {
@@ -114,7 +115,7 @@ public class ControladorVentasCrear {
         arrayProductos = modeloProductos.getProductos();
         DefaultTableModel model = (DefaultTableModel) vistaVentasCrear.tbProductos.getModel();
         for (int i = 0; i < arrayProductos.size(); i++) {
-            model.addRow(new Object[]{arrayProductos.get(i).id, arrayProductos.get(i).nombre, arrayProductos.get(i).marca, arrayProductos.get(i).categoria, arrayProductos.get(i).cantidad, arrayProductos.get(i).precio1_10, arrayProductos.get(i).precio10_20, arrayProductos.get(i).precio20_, arrayProductos.get(i).costo, arrayProductos.get(i).precio4, arrayProductos.get(i).precio5});
+            model.addRow(new Object[]{arrayProductos.get(i).id, arrayProductos.get(i).nombre, arrayProductos.get(i).marca, arrayProductos.get(i).categoria, arrayProductos.get(i).cantidad, arrayProductos.get(i).precio1_10, arrayProductos.get(i).precio10_20, arrayProductos.get(i).precio20_, arrayProductos.get(i).precio4, arrayProductos.get(i).precio5, arrayProductos.get(i).costo});
         }
         // Para desactivar el movimiento hacia abajo cuando se da enter dentro de la tabla
         createKeybindings(vistaVentasCrear.tbProductos);
@@ -164,6 +165,19 @@ public class ControladorVentasCrear {
             return;
         }
         
+        // I'm going to check only case seller if client type price is correct
+        if(this.permission.equals("V")){
+            for (int i = 0; i < model.getRowCount(); i++) {
+                if(this.preciofijo.equals("Ninguno")) {
+                    String typePrice = model.getValueAt(i, 5).toString();
+                    if(!typePrice.equals("1") && !typePrice.equals("2")) {
+                        JOptionPane.showMessageDialog(null,"Usted no tiene permisos para generar ventas diferentes a precio 1 o 2");
+                        return;
+                    }   
+                }
+            }
+        }
+        
         venta.setIdCliente(Integer.parseInt(idClienteElegido));
         venta.setNombre(vistaVentasCrear.txtCliente.getText());
         venta.setFecha(dateFormat.format(date));
@@ -175,7 +189,7 @@ public class ControladorVentasCrear {
         venta.setComentario(vistaVentasCrear.txaComentario.getText());
         
         idVentasGenerado = modeloVentas.crearVenta(venta);
-
+        
         //----------------------------------
         // Esto se debe repetir en un bucle y ser obtenido de la tabla
         
@@ -230,6 +244,7 @@ public class ControladorVentasCrear {
     
     private void createKeybindings(JTable table) {
         final String per = this.permission;
+        //final String pre_fijo = this.preciofijo;
     table.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "Enter");
         table.getActionMap().put("Enter", new AbstractAction() {
             
@@ -246,18 +261,26 @@ public class ControladorVentasCrear {
                 int selectedRowIndex = vistaVentasCrear.tbProductos.getSelectedRow();
                 int realRow = vistaVentasCrear.tbProductos.convertRowIndexToModel(selectedRowIndex);
                 
+                vistaVentasCrear.lblRealRow.setText(String.valueOf(realRow));
                 // Grabo los datos en el objeto cliente recibido como argumento.
                 vistaVentasCrear.lblIdProducto.setText(model.getValueAt(realRow, 0).toString());
                 vistaVentasCrear.txtProductoSeleccionado.setText((String) model.getValueAt(realRow, 1));
                 vistaVentasCrear.lblCantidadProducto.setText((String) model.getValueAt(realRow, 4));
-                vistaVentasCrear.lblCostoProducto.setText((String) model.getValueAt(realRow, 8));
-                vistaVentasCrear.cbPrecio.addItem((String) model.getValueAt(realRow, 5));
-                vistaVentasCrear.cbPrecio.addItem((String) model.getValueAt(realRow, 6));
-                if(per.equals("A")) {
-                    vistaVentasCrear.cbPrecio.addItem((String) model.getValueAt(realRow, 7));
-                    vistaVentasCrear.cbPrecio.addItem((String) model.getValueAt(realRow, 9));
-                    vistaVentasCrear.cbPrecio.addItem((String) model.getValueAt(realRow, 10));
+                vistaVentasCrear.lblCostoProducto.setText((String) model.getValueAt(realRow, 10));
+                String pre_fijo = vistaVentasCrear.lblPreciofijo.getText();
+                if(pre_fijo.equals("Ninguno")) {
+                    vistaVentasCrear.cbPrecio.addItem((String) model.getValueAt(realRow, 5));
+                    vistaVentasCrear.cbPrecio.addItem((String) model.getValueAt(realRow, 6));
+                    if(per.equals("A")) {
+                        vistaVentasCrear.cbPrecio.addItem((String) model.getValueAt(realRow, 7));
+                        vistaVentasCrear.cbPrecio.addItem((String) model.getValueAt(realRow, 8));
+                        vistaVentasCrear.cbPrecio.addItem((String) model.getValueAt(realRow, 9));
+                    }
+                } else {
+                    int pre_fijo_number = Integer.parseInt(pre_fijo);
+                    vistaVentasCrear.cbPrecio.addItem((String) model.getValueAt(realRow, pre_fijo_number + 4));
                 }
+                
                 vistaVentasCrear.txtCantidad.requestFocusInWindow();
             }
         });
@@ -296,7 +319,11 @@ public class ControladorVentasCrear {
                 String totalPrecioProducto = String.valueOf(cantidad*precio);
                 String gananciaProducto = String.valueOf((precio-costo)*cantidad);
                 String costoProducto = String.valueOf(costo);
-                model.addRow(new Object[]{vistaVentasCrear.lblIdProducto.getText(), vistaVentasCrear.txtProductoSeleccionado.getText(), vistaVentasCrear.txtCantidad.getText(), vistaVentasCrear.cbPrecio.getSelectedItem().toString(), totalPrecioProducto, String.valueOf(vistaVentasCrear.cbPrecio.getSelectedIndex()+1), gananciaProducto, costoProducto});
+                String pre_fijo = String.valueOf(vistaVentasCrear.cbPrecio.getSelectedIndex()+1);
+                if(!this.preciofijo.equals("Ninguno")) {
+                    pre_fijo = this.preciofijo;
+                }
+                model.addRow(new Object[]{vistaVentasCrear.lblIdProducto.getText(), vistaVentasCrear.txtProductoSeleccionado.getText(), vistaVentasCrear.txtCantidad.getText(), vistaVentasCrear.cbPrecio.getSelectedItem().toString(), totalPrecioProducto, pre_fijo, gananciaProducto, costoProducto, vistaVentasCrear.lblRealRow.getText()});
                 
                 // Debe recorrer toda la tabla y sumar los totales para luego sacar el subtotal e igv
                 calculosTablaVenta();
@@ -382,7 +409,35 @@ public class ControladorVentasCrear {
     }
     
     public void lblPropertyChange(PropertyChangeEvent evt){
-        System.out.println("Yes, I knock off");
+        this.preciofijo = vistaVentasCrear.lblPreciofijo.getText();
+        // Now make changes in the sales table with fix price in case it be different of Ninguno
+        if(!this.preciofijo.equals("Ninguno")) {
+            int preciofijo = Integer.parseInt(this.preciofijo);
+            DefaultTableModel model = (DefaultTableModel) vistaVentasCrear.tbVenta.getModel();
+            DefaultTableModel modelProducts = (DefaultTableModel) vistaVentasCrear.tbProductos.getModel();
+            for (int i = 0; i < model.getRowCount(); i++) {
+                // Get current amount in the row
+                float amountProduct = Float.parseFloat(model.getValueAt(i, 2).toString());
+                float costo = Float.parseFloat(model.getValueAt(i, 7).toString());
+                int realRowTbProducts = Integer.parseInt(model.getValueAt(i, 8).toString());
+                // Get price of specific price type from left table -> "tbProducts"
+                float priceSpecificType = 0f;
+                try{
+                    priceSpecificType = Float.parseFloat(modelProducts.getValueAt(realRowTbProducts, preciofijo + 4).toString());
+                }catch(Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Advertencia, no se pudo reemplazar los todos precios,\nVerifique que los productos que intenta vender tengan el precio tipo: "+this.preciofijo+" rellenado");
+                    return;
+                }
+                String totalPrecioProducto = String.valueOf(amountProduct*priceSpecificType);
+                String gananciaProducto = String.valueOf((priceSpecificType-costo)*amountProduct);
+                // Set up/re-configurate data table with new price of specific price type
+                model.setValueAt(priceSpecificType, i, 3);
+                model.setValueAt(totalPrecioProducto, i, 4);
+                model.setValueAt(this.preciofijo, i, 5);
+                model.setValueAt(gananciaProducto, i, 6);
+            }
+            calculosTablaVenta();
+        }
     }
     
     public void mostrarImagen() {

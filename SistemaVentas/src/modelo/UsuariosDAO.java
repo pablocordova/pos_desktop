@@ -28,6 +28,7 @@ public class UsuariosDAO {
                 usuario.setPrivilegios(rs.getString(6));
                 return usuario;
             }
+            accesoDB.close();
         } catch (Exception e) {
             System.out.println("Error conectando base de datos, UsuariosDAO");
         }
@@ -52,7 +53,8 @@ public class UsuariosDAO {
                 usuarios.setNombres(rs.getString(5));
                 usuarios.setPrivilegios(rs.getString(6));
                 losUsuariosLista.add(usuarios);
-            }            
+            }  
+            accesoDB.close();
         } catch ( Exception e) {
             System.out.println("Error conectando base de datos, getUsuarios()" + e);
         }
@@ -66,6 +68,7 @@ public class UsuariosDAO {
           PreparedStatement ps = accesoDB.prepareStatement("delete from usuarios where idusuarios=?");
           ps.setInt(1, idUsuario);
           rs = ps.executeUpdate();
+          accesoDB.close();
         }
         catch(Exception ex) {
             System.out.println("Problema en base de datos, eliminarUsuario() : " + ex);
@@ -84,6 +87,7 @@ public class UsuariosDAO {
             ps.setString(5, usuario.privilegios);
             rs = ps.executeUpdate();
             System.out.println("respuesta: " + rs);
+            accesoDB.close();
         }
         catch (Exception ex) {
             System.out.println("Problema en base de datos, crearUsuario() : " + ex);

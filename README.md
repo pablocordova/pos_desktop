@@ -4,7 +4,7 @@
 
 - https://github.com/pablocordova/POS
 
-Sistema de control de ventas basico con las siguientes caracteristicas:
+Sistema de control de ventas con las siguientes caracteristicas:
 
 1. Opcion de administrador y vendedor(diferenciarlo al hacer login) 
 2. Lista de clientes(Autocompletado en busqueda de clientes) 
@@ -16,6 +16,24 @@ Sistema de control de ventas basico con las siguientes caracteristicas:
 8. Estadisticas para ver el producto mas vendido por mes y año (administrador)
 9. Estadisticas por cliente (Para ver que es lo que mas compro) (administrador) 
 10. Cuanto se ha vendido con el precio 1,2 y 3.
+
+### ACTUALIZACIONES 18/06/2017 ###
+
+Cuando es estadisticas productos por año, se raya a veces y ya no funciona otras opciones. -- Bug
+Precios fijos para clientes especificos y tambien cuando el cliente se agrege al final. -- Caracteristica
+Reporte diario en estadisticas por precio  -- Caracteristica
+El vendedor minoreo solo pueda elegir/ver los 2 primeros precios. -- Caracteristica
+Actualmente hay 3 precios,debe haber 5 precios. -- Caracteristica
+En la boleta cambiar la cantidad directamente. -- Caracteristica
+Usuario vendedor no debe eliminar ventas. -- Caracteristica
+Reporte precio 1 no aparece. -- Bug
+En la ventana de ventas, la tabla dice,cliente, precio y fecha, agregarle la hora y comentario. -- Caracteristica
+
+Nota sobre base de datos: 
+
+1. Se añadio columna "comentario" en la tabla "ventas" VARCHAR(400)
+2. Se añadio columna "precio4" y "precio5" en la tabla "productos", VARCHAR(10) los dos
+3. Se añadio columna "preciofijo" en la tabla "clientes", VARCHAR(10)
 
 ### REQUERIMIENTOS ###
 

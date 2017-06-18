@@ -37,7 +37,8 @@ public class VentasDAO {
                 ventas.setGananciaTotal(rs.getString(9));
                 ventas.setComentario(rs.getString(10));
                 lasVentasLista.add(ventas);
-            }            
+            }  
+            accesoDB.close();
         } catch ( Exception e) {
             System.out.println("Error conectando base de datos, VentasDAO" + e);
         }
@@ -64,7 +65,8 @@ public class VentasDAO {
                 venta.setIgv(rs.getString(7));
                 venta.setMonto(rs.getString(8));
                 venta.setGananciaTotal(rs.getString(9));
-            }            
+            }  
+            accesoDB.close();
         } catch ( Exception e) {
             System.out.println("Error conectando base de datos, VentasDAO, getVenta()" + e);
         }
@@ -92,7 +94,8 @@ public class VentasDAO {
                 ventas.setPrecioProducto(rs.getString(7));
                 ventas.setGananciaProducto(rs.getString(8));
                 lasVentasLista.add(ventas);
-            }            
+            } 
+            accesoDB.close();
         } catch ( Exception e) {
             System.out.println("Error conectando base de datos, VentasDAO, getVentasProducto()" + e);
         }
@@ -116,6 +119,7 @@ public class VentasDAO {
           PreparedStatement ps = accesoDB.prepareStatement("delete from ventaproducto where idventa=?");
           ps.setInt(1, idVenta);
           rs = ps.executeUpdate();
+          accesoDB.close();
         }
         catch(Exception ex) {
             System.out.println("Problema en base de datos, Eliminar VentaProducto : " + ex);
@@ -145,6 +149,7 @@ public class VentasDAO {
             if (rss.next()){
                 idVentaGenerado = rss.getInt(1);
             }
+            accesoDB.close();
         }
         catch (Exception ex) {
             System.out.println("Problema en base de datos, crearVenta() : " + ex);
@@ -168,6 +173,7 @@ public class VentasDAO {
 
             rs = ps.executeUpdate();
             System.out.println("respuesta: " + rs);
+            accesoDB.close();
         }
         catch (Exception ex) {
             System.out.println("Problema en base de datos, crearVentaProducto() : " + ex);
@@ -188,7 +194,8 @@ public class VentasDAO {
             
             while(rs.next()) {
                 idVentasLista.add(rs.getInt(1));
-            }            
+            } 
+            accesoDB.close();
         } catch ( Exception e) {
             System.out.println("Error conectando base de datos, getIdVentas()" + e);
         }
@@ -207,7 +214,8 @@ public class VentasDAO {
             
             while(rs.next()) {
                 idVentasLista.add(rs.getInt(1));
-            }            
+            } 
+            accesoDB.close();
         } catch ( Exception e) {
             System.out.println("Error conectando base de datos, getIdVentas()" + e);
         }
@@ -230,7 +238,8 @@ public class VentasDAO {
                 ventas.setIdProducto(rs.getInt(1));
                 ventas.setCantidadProducto(rs.getString(2));
                 idVentasLista.add(ventas);
-            }            
+            }   
+            accesoDB.close();
         } catch ( Exception e) {
             System.out.println("Error conectando base de datos, getIdCantidadProductos()" + e);
         }
@@ -248,10 +257,12 @@ public class VentasDAO {
             
             while(rs.next()) {
                 nameProducto = rs.getString(1);
-            }            
+            }
+            accesoDB.close();
         } catch ( Exception e) {
             System.out.println("Error conectando base de datos, getNameProducto()" + e);
         }
+        
         return nameProducto;
     }
     
@@ -272,7 +283,8 @@ public class VentasDAO {
                 ventas.setCantidadProducto(rs.getString(1));
                 ventas.setPrecioProducto(rs.getString(2));
                 lasVentasLista.add(ventas);
-            }            
+            }
+            accesoDB.close();
         } catch ( Exception e) {
             System.out.println("Error conectando base de datos, VentasDAO, getCantPrecioProducto()" + e);
         }
@@ -290,7 +302,8 @@ public class VentasDAO {
             
             while(rs.next()) {
                 idCliente = rs.getInt(1);
-            }            
+            }
+            accesoDB.close();
         } catch ( Exception e) {
             System.out.println("Error conectando base de datos, getIdCliente()" + e);
         }

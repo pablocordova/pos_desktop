@@ -40,6 +40,7 @@ public class ProductosDAO {
                productos.setPrecio5(rs.getString(12));
                listaProductos.add(productos);
            }
+           accesoDB.close();
        }
        catch(Exception e) {
            System.out.println("Error conectando base de datos, getProductos" + e);
@@ -70,13 +71,14 @@ public class ProductosDAO {
                producto.setPrecio4(rs.getString(11));
                producto.setPrecio5(rs.getString(12));
            }
+           accesoDB.close();
        }
        catch(Exception e) {
            System.out.println("Error conectando base de datos, getProducto()" + e);
        }
        return producto;
     }
-    
+       
     public void eliminarProductos(int idProducto) {
         Connection accesoDB = conexion.getConexion();
         int rs = 0;
@@ -85,6 +87,7 @@ public class ProductosDAO {
           PreparedStatement ps = accesoDB.prepareStatement("delete from productos where idproductos=?");
           ps.setInt(1, idProducto);
           rs = ps.executeUpdate();
+          accesoDB.close();
         }
         catch(Exception ex) {
             System.out.println("Problema en base de datos, Eliminar Productos : " + ex);
@@ -118,6 +121,7 @@ public class ProductosDAO {
             }
             rs = ps.executeUpdate();
             System.out.println("respuesta: " + rs);
+            accesoDB.close();
         }
         catch (Exception ex) {
             System.out.println("Problema en base de datos, Crear Producto : " + ex);
@@ -151,6 +155,7 @@ public class ProductosDAO {
             }
             ps.setInt(12, producto.id);
             rs = ps.executeUpdate();
+            accesoDB.close();
         }
         catch(Exception ex) {
             System.out.println("Problema en base de datos, Actualizar producto : " + ex);
@@ -165,6 +170,7 @@ public class ProductosDAO {
             ps.setString(1, cantidad);
             ps.setInt(2, idProducto);
             rs = ps.executeUpdate();
+            accesoDB.close();
         }
         catch(Exception ex) {
             System.out.println("Problema en base de datos, actualizarCantidadProducto() : " + ex);
@@ -182,6 +188,7 @@ public class ProductosDAO {
             while(rs.next()) {
                 imagen = rs.getBinaryStream(1);
             }
+            accesoDB.close();
         }
         catch(Exception e) {
             System.out.println("Error conectando base de datos, getImagenProducto()" + e);

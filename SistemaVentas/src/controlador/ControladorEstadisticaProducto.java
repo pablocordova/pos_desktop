@@ -70,6 +70,7 @@ public class ControladorEstadisticaProducto {
         // y su cantidad respectiva
         if(idVentas.size() != 0){
             for (int i = 0; i < idVentas.size(); i++) {
+                System.out.println(Integer.parseInt(idVentas.get(i).toString()));
                 ArrayList<Ventas> ventasProductos = modeloVentas.getIdCantidadProductos(Integer.parseInt(idVentas.get(i).toString()));
                 for (int j = 0; j < ventasProductos.size(); j++) {
                     System.out.println(ventasProductos.get(j).getIdProducto() +":"+ ventasProductos.get(j).getCantidadProducto());
@@ -91,6 +92,7 @@ public class ControladorEstadisticaProducto {
                     
         for(int z = 0; z < idscantidad.size(); z++) {
             // orden:  cantidad, valor(idProducto, nombreprodcuto)
+            System.out.println((int) idscantidad.get(z)[0]);
             String nameProducto = modeloVentas.getNameProducto((int) idscantidad.get(z)[0]);
             data.addValue(idscantidad.get(z)[1], nombre, nameProducto);
         }
