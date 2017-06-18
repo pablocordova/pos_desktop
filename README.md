@@ -19,15 +19,15 @@ Sistema de control de ventas con las siguientes caracteristicas:
 
 ### ACTUALIZACIONES 18/06/2017 ###
 
-Cuando es estadisticas productos por año, se raya a veces y ya no funciona otras opciones. -- Bug
-Precios fijos para clientes especificos y tambien cuando el cliente se agrege al final. -- Caracteristica
-Reporte diario en estadisticas por precio  -- Caracteristica
-El vendedor minoreo solo pueda elegir/ver los 2 primeros precios. -- Caracteristica
-Actualmente hay 3 precios,debe haber 5 precios. -- Caracteristica
-En la boleta cambiar la cantidad directamente. -- Caracteristica
-Usuario vendedor no debe eliminar ventas. -- Caracteristica
-Reporte precio 1 no aparece. -- Bug
-En la ventana de ventas, la tabla dice,cliente, precio y fecha, agregarle la hora y comentario. -- Caracteristica
+1. Cuando es estadisticas productos por año, se raya a veces y ya no funciona otras opciones. -- Bug
+2. Precios fijos para clientes especificos y tambien cuando el cliente se agrege al final. -- Caracteristica
+3. Reporte diario en estadisticas por precio  -- Caracteristica
+4. El vendedor minoreo solo pueda elegir/ver los 2 primeros precios. -- Caracteristica
+5. Actualmente hay 3 precios,debe haber 5 precios. -- Caracteristica
+6. En la boleta cambiar la cantidad directamente. -- Caracteristica
+7. Usuario vendedor no debe eliminar ventas. -- Caracteristica
+8. Reporte precio 1 no aparece. -- Bug
+9. En la ventana de ventas, la tabla dice,cliente, precio y fecha, agregarle la hora y comentario. -- Caracteristica
 
 Nota sobre base de datos: 
 
