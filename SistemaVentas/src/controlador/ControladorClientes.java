@@ -26,6 +26,7 @@ public class ControladorClientes {
     JFClientes vistaClientes;
     ClientesDAO modeloClientes;
     JFVentasCrear vistaVentaCrear;
+    String permission;
     private TableRowSorter<TableModel> modeloOrdenado;
     
     public ControladorClientes(JFClientes vistaClientes, ClientesDAO modeloClientes) {
@@ -62,12 +63,13 @@ public class ControladorClientes {
         });
     }
     
-    public void InicializarClientes() {
+    public void InicializarClientes(String permission) {
+        this.permission = permission;
         ArrayList<Clientes> arrayClientes = new ArrayList<Clientes>();
         arrayClientes= modeloClientes.getClientes();
         DefaultTableModel model = (DefaultTableModel) vistaClientes.tbClientes.getModel();
         for (int i = 0; i < arrayClientes.size(); i++) {
-            model.addRow(new Object[]{arrayClientes.get(i).id, arrayClientes.get(i).nombres, arrayClientes.get(i).apellidos, arrayClientes.get(i).dni, arrayClientes.get(i).direccion, arrayClientes.get(i).telefono, arrayClientes.get(i).ruc});
+            model.addRow(new Object[]{arrayClientes.get(i).id, arrayClientes.get(i).nombres, arrayClientes.get(i).apellidos, arrayClientes.get(i).dni, arrayClientes.get(i).direccion, arrayClientes.get(i).telefono, arrayClientes.get(i).ruc, arrayClientes.get(i).preciofijo});
         }
         // Para desactivar el movimiento hacia abajo cuando se da enter dentro de la tabla
         createKeybindings(vistaClientes.tbClientes);
@@ -119,7 +121,10 @@ public class ControladorClientes {
         JFClientesMC vistaClientesMC= new JFClientesMC();
         ControladorClientesMC clientesMC = new ControladorClientesMC(modeloClientes, vistaClientesMC, this);
         // Inicializar clienteModificar
-        clientesMC.InicializarClientesMC(clientes);
+        clientesMC.InicializarClientesMC(clientes, this.permission);
+        if(this.permission.equals("V")) {
+            vistaClientesMC.cbPrecioFijo.setEnabled(false);
+        }
         vistaClientesMC.setVisible(true);
         vistaClientesMC.setLocationRelativeTo(null);
     }
@@ -145,11 +150,15 @@ public class ControladorClientes {
         clientes.setDireccion((String) model.getValueAt(realRow, 4));
         clientes.setTelefono((String) model.getValueAt(realRow, 5));
         clientes.setRuc((String) model.getValueAt(realRow, 6));
+        clientes.setPreciofijo((String) model.getValueAt(realRow, 7));
       
         JFClientesMC vistaClientesMC= new JFClientesMC();
         ControladorClientesMC clientesMC = new ControladorClientesMC(modeloClientes, vistaClientesMC, this);
         // Inicializar clienteModificar
-        clientesMC.InicializarClientesMC(clientes);
+        clientesMC.InicializarClientesMC(clientes, this.permission);
+        if(this.permission.equals("V")) {
+            vistaClientesMC.cbPrecioFijo.setEnabled(false);
+        }
         vistaClientesMC.setVisible(true);
         vistaClientesMC.setLocationRelativeTo(null);
         
@@ -179,6 +188,15 @@ public class ControladorClientes {
                     //vistaVentaCrear.lblDni.setText(cliente.dni);
                     vistaVentaCrear.lblRuc.setText(cliente.ruc);
                     vistaVentaCrear.lblDireccion.setText(cliente.direccion);
+                    String text_pix_price = "Ninguno";
+                    System.out.println(cliente.preciofijo);
+                    if(cliente.preciofijo != "" && cliente.preciofijo != null && cliente.preciofijo.length() != 0) {
+                        int fix_price = Integer.parseInt(cliente.preciofijo);
+                        if(fix_price != 0) {
+                            text_pix_price = String.valueOf(fix_price);
+                        }
+                    }
+                    vistaVentaCrear.lblPreciofijo.setText(text_pix_price);
                     
                     vistaClientes.dispose();
                 }

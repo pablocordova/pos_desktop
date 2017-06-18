@@ -35,6 +35,7 @@ public class ControladorEstadisticasVP {
         // ------------------------------
         String buscar = "";
         // Conseguir los datos de las fechas
+        String dia = vistaEstadisticaVP.cbDia.getSelectedItem().toString() ;
         int numeroMes = vistaEstadisticaVP.cbFecha.getSelectedIndex() + 1;
         String mes = String.valueOf(numeroMes);
         if(numeroMes<10) {
@@ -43,14 +44,20 @@ public class ControladorEstadisticasVP {
         String ano = vistaEstadisticaVP.cbAno.getSelectedItem().toString();
         
         int numeroTipo = vistaEstadisticaVP.cbTipo.getSelectedIndex();
-        if(numeroTipo == 0) {
-            // Caso se seleccione por mes
-            buscar = mes + "/" + ano;
+        switch(numeroTipo) {
+            case 0:
+                buscar = dia + "/" + mes + "/" + ano;
+                break;
+            case 1:
+                // Caso se seleccione por mes
+                buscar = mes + "/" + ano;
+                break;
+            case 2:
+                // caso se seleccione por año
+                buscar =  ano;
+                break;
         }
-        else {
-            // caso se seleccione por año
-            buscar =  ano;
-        }
+
         // Obtener todos los idventas que contengan en su fecha el string "buscar"
         ArrayList<Integer> idVentas = modeloVentas.getIdVentas(buscar);
         

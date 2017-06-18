@@ -61,11 +61,11 @@ public class JFClientes extends javax.swing.JFrame {
 
             },
             new String [] {
-                "id", "Nombres", "Apellidos", "DNI", "Direccion", "Telefono", "RUC"
+                "id", "Nombres", "Apellidos", "DNI", "Direccion", "Telefono", "RUC", "preciofijo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -77,6 +77,8 @@ public class JFClientes extends javax.swing.JFrame {
         if (tbClientes.getColumnModel().getColumnCount() > 0) {
             tbClientes.getColumnModel().getColumn(0).setMinWidth(0);
             tbClientes.getColumnModel().getColumn(0).setMaxWidth(0);
+            tbClientes.getColumnModel().getColumn(7).setMinWidth(0);
+            tbClientes.getColumnModel().getColumn(7).setMaxWidth(0);
         }
 
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {

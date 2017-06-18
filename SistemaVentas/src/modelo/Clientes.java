@@ -8,6 +8,7 @@ public class Clientes {
     public String direccion;
     public String telefono;
     public String ruc;
+    public String preciofijo;
     
     public Clientes() {
         id = 0;
@@ -17,6 +18,7 @@ public class Clientes {
         direccion = "";
         telefono = "";
         ruc = "";
+        preciofijo = "";
     }
 
     public String getRuc() {
@@ -74,5 +76,14 @@ public class Clientes {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
+
+    public String getPreciofijo() {
+        return preciofijo;
+    }
+
+    public void setPreciofijo(String preciofijo) {
+        this.preciofijo = preciofijo;
+    }
+    
     
 }

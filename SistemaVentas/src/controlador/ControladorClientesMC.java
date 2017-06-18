@@ -13,6 +13,7 @@ public class ControladorClientesMC {
     JFClientesMC vistaClientesMC;
     ControladorClientes controladorClientes;
     Clientes cliente;
+    String permission;
     public ControladorClientesMC(ClientesDAO modeloClientes, JFClientesMC vistaClientesMC, ControladorClientes controladorClientes) {
         this.modeloClientes= modeloClientes;
         this.vistaClientesMC = vistaClientesMC;
@@ -35,7 +36,8 @@ public class ControladorClientesMC {
         });
     }
     
-    public void InicializarClientesMC(Clientes cliente){
+    public void InicializarClientesMC(Clientes cliente, String permission){
+        this.permission = permission;
         vistaClientesMC.lblModificarCrearClientes.setText("CREAR CLIENTE");
         // Caso sea actualizar, rellenar los campos con los datos recibidos en producto
         if(cliente.id > 0){
@@ -46,6 +48,9 @@ public class ControladorClientesMC {
             vistaClientesMC.txtDireccion.setText(cliente.direccion);
             vistaClientesMC.txtTelefono.setText(cliente.telefono);
             vistaClientesMC.txtRuc.setText(cliente.ruc);
+            if(cliente.preciofijo != ""){
+                vistaClientesMC.cbPrecioFijo.setSelectedIndex(Integer.parseInt(cliente.preciofijo));
+            }
         }
         vistaClientesMC.idClientes.setText(String.valueOf(cliente.id));
     }
@@ -59,6 +64,7 @@ public class ControladorClientesMC {
         cliente.direccion = vistaClientesMC.txtDireccion.getText();
         cliente.telefono = vistaClientesMC.txtTelefono.getText();
         cliente.ruc = vistaClientesMC.txtRuc.getText();
+        cliente.preciofijo = String.valueOf(vistaClientesMC.cbPrecioFijo.getSelectedIndex());
         
         // Para detectar si no ha rellenado los datos obligatorios
         if(cliente.nombres.equals("")) {
@@ -90,7 +96,7 @@ public class ControladorClientesMC {
         }
         vistaClientesMC.dispose();
         controladorClientes.limpiaTabla();
-        controladorClientes.InicializarClientes();
+        controladorClientes.InicializarClientes(this.permission);
     }
     public void btnCancelarActionPerformed (ActionEvent evt){
         vistaClientesMC.dispose();

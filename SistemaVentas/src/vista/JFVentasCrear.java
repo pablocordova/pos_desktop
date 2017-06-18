@@ -79,6 +79,8 @@ public class JFVentasCrear extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         txaComentario = new javax.swing.JTextArea();
         jLabel17 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        lblPreciofijo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -344,6 +346,15 @@ public class JFVentasCrear extends javax.swing.JFrame {
 
         jLabel17.setText("Comentario:");
 
+        jLabel6.setText("Precio:");
+
+        lblPreciofijo.setText("Ninguno");
+        lblPreciofijo.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                lblPreciofijoPropertyChange(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -351,11 +362,6 @@ public class JFVentasCrear extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel16)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE)
@@ -366,7 +372,8 @@ public class JFVentasCrear extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblRuc)
-                                    .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblPreciofijo))
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -392,12 +399,24 @@ public class JFVentasCrear extends javax.swing.JFrame {
                                             .addComponent(lblIgv)
                                             .addComponent(lblSubTotal)))
                                     .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel16)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel6))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(47, 47, 47)
+                .addGap(27, 27, 27)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(lblPreciofijo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -474,6 +493,11 @@ public class JFVentasCrear extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tbVentaKeyPressed
 
+    private void lblPreciofijoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_lblPreciofijoPropertyChange
+        // TODO add your handling code here:
+        //System.out.println("Property change???");
+    }//GEN-LAST:event_lblPreciofijoPropertyChange
+
     /**
      * @param args the command line arguments
      */
@@ -528,6 +552,7 @@ public class JFVentasCrear extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -545,6 +570,7 @@ public class JFVentasCrear extends javax.swing.JFrame {
     public javax.swing.JLabel lblIdProducto;
     public javax.swing.JLabel lblIgv;
     public javax.swing.JLabel lblImagen;
+    public javax.swing.JLabel lblPreciofijo;
     public javax.swing.JLabel lblRuc;
     public javax.swing.JLabel lblSubTotal;
     public javax.swing.JLabel lblTipoPrecio;

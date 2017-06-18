@@ -74,7 +74,7 @@ public class ControladorPrincipal{
         ControladorClientes clientes = new ControladorClientes(vistaClientes, modeloClientes);
         vistaClientes.setVisible(true);
         vistaClientes.setLocationRelativeTo(null);
-        clientes.InicializarClientes();
+        clientes.InicializarClientes(this.permission);
     }   
     
     public void btnProductosActionPerformed(ActionEvent evt) {

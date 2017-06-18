@@ -28,6 +28,7 @@ public class ClientesDAO {
                 clientes.setDireccion(rs.getString(5));
                 clientes.setTelefono(rs.getString(6));
                 clientes.setRuc(rs.getString(7));
+                clientes.setPreciofijo(rs.getString(8));
                 losClientesLista.add(clientes);
             }            
         } catch ( Exception e) {
@@ -40,13 +41,14 @@ public class ClientesDAO {
         Connection accesoDB = conexion.getConexion();
         int rs = 0;
         try {
-            PreparedStatement ps = accesoDB.prepareStatement("insert into clientes (nombres, apellidos, dni, direccion, telefono, ruc) values (?,?,?,?,?,?)");
+            PreparedStatement ps = accesoDB.prepareStatement("insert into clientes (nombres, apellidos, dni, direccion, telefono, ruc, preciofijo) values (?,?,?,?,?,?,?)");
             ps.setString(1, cliente.nombres);
             ps.setString(2, cliente.apellidos);
             ps.setString(3, cliente.dni);
             ps.setString(4, cliente.direccion);
             ps.setString(5, cliente.telefono);
             ps.setString(6, cliente.ruc);
+            ps.setString(7, cliente.preciofijo);
             rs = ps.executeUpdate();
             System.out.println("respuesta: " + rs);
         }
@@ -61,14 +63,15 @@ public class ClientesDAO {
         Connection accesoDB = conexion.getConexion();
         int rs = 0;
         try {
-            PreparedStatement ps = accesoDB.prepareStatement("update clientes set nombres=?,apellidos=?,dni=?,direccion=?,telefono=?,ruc=? where idclientes=?");
+            PreparedStatement ps = accesoDB.prepareStatement("update clientes set nombres=?,apellidos=?,dni=?,direccion=?,telefono=?,ruc=?,preciofijo=? where idclientes=?");
             ps.setString(1, cliente.nombres);
             ps.setString(2, cliente.apellidos);
             ps.setString(3, cliente.dni);
             ps.setString(4, cliente.direccion);
             ps.setString(5, cliente.telefono);
             ps.setString(6, cliente.ruc);
-            ps.setInt(7, cliente.id);
+            ps.setString(7, cliente.preciofijo);
+            ps.setInt(8, cliente.id);
             rs = ps.executeUpdate();
         }
         catch(Exception ex) {
@@ -106,6 +109,7 @@ public class ClientesDAO {
                 cliente.setDireccion(rs.getString(5));
                 cliente.setTelefono(rs.getString(6));
                 cliente.setRuc(rs.getString(7));
+                cliente.setPreciofijo(rs.getString(8));
             }            
         } catch ( Exception e) {
             System.out.println("Error conectando base de datos, getCliente" + e);

@@ -2,6 +2,8 @@
 package controlador;
 
 import java.awt.event.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.*;
 import java.text.*;
 import java.util.*;
@@ -96,6 +98,13 @@ public class ControladorVentasCrear {
             }
         });
         
+        this.vistaVentasCrear.lblPreciofijo.addPropertyChangeListener(new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                lblPropertyChange(evt);
+            }
+        });
+        
     }
     public void InicializarVentasCrear(String permission) {
         this.permission = permission;
@@ -119,7 +128,7 @@ public class ControladorVentasCrear {
         ControladorClientes clientes = new ControladorClientes(vistaClientes, modeloClientes);
         vistaClientes.setVisible(true);
         vistaClientes.setLocationRelativeTo(null);
-        clientes.InicializarClientes();
+        clientes.InicializarClientes(this.permission);
         clientes.ClientesVentas(vistaVentasCrear);
     }
     public void btnGuardarActionPerformed(ActionEvent evt) {
@@ -370,6 +379,10 @@ public class ControladorVentasCrear {
             // Calculate and print paramters
             calculosTablaVenta();
         }
+    }
+    
+    public void lblPropertyChange(PropertyChangeEvent evt){
+        System.out.println("Yes, I knock off");
     }
     
     public void mostrarImagen() {
