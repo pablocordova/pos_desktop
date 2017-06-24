@@ -3,10 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/G:/projects/VentasIsaac/Cont_Soft_1_6/SistemaVentas/src/controlador/ControladorVentasCrear.java</file>
+            <file>file:/G:/projects/VentasIsaac/Cont_Soft_1_6/SistemaVentas/src/vista/JFVentasCrear.java</file>
+            <file>file:/G:/projects/VentasIsaac/Cont_Soft_1_6/SistemaVentas/src/vista/JFEstadisticaProducto.java</file>
+            <file>file:/G:/projects/VentasIsaac/Cont_Soft_1_6/SistemaVentas/src/controlador/ControladorEstadisticaProducto.java</file>
             <file>file:/G:/projects/VentasIsaac/Cont_Soft_1_6/SistemaVentas/src/modelo/VentasDAO.java</file>
-            <file>file:/G:/projects/VentasIsaac/Cont_Soft_1_6/SistemaVentas/src/vista/JFVentas.java</file>
-            <file>file:/G:/projects/VentasIsaac/Cont_Soft_1_6/SistemaVentas/src/controlador/ControladorVentas.java</file>
+            <file>file:/G:/projects/VentasIsaac/Cont_Soft_1_6/SistemaVentas/src/modelo/Conexion.java</file>
+            <file>file:/G:/projects/VentasIsaac/Cont_Soft_1_6/SistemaVentas/src/modelo/ProductosDAO.java</file>
+            <file>file:/G:/projects/VentasIsaac/Cont_Soft_1_6/SistemaVentas/src/modelo/UsuariosDAO.java</file>
         </group>
     </open-files>
 </project-private>

@@ -5,6 +5,8 @@ import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.*;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.*;
 import java.util.*;
 import javax.swing.*;
@@ -199,17 +201,17 @@ public class ControladorVentasCrear {
             venta.setIdVenta(idVentasGenerado); // averiguar
             venta.setIdProducto(Integer.parseInt(model.getValueAt(i, 0).toString()));
             venta.setNombre((String) model.getValueAt(i, 1));
-            venta.setCantidadProducto((String) model.getValueAt(i, 2));
-            venta.setPrecioProducto((String) model.getValueAt(i, 3));
-            venta.setTipoPrecioProducto((String) model.getValueAt(i, 5));
-            venta.setGananciaProducto((String) model.getValueAt(i, 6)); //averiguar
+            venta.setCantidadProducto(String.valueOf( model.getValueAt(i, 2)));
+            venta.setPrecioProducto(String.valueOf(model.getValueAt(i, 3)));
+            venta.setTipoPrecioProducto(String.valueOf( model.getValueAt(i, 5)));
+            venta.setGananciaProducto(String.valueOf( model.getValueAt(i, 6))); //averiguar
             modeloVentas.crearVentaProducto(venta);
             // Tambien modificar la cantidad en cada producto
             // Pasos: obtener la cantidad de cada producto con el idProducto
             // restarlo con la cantidad pedida
             Productos producto = modeloProductos.getProducto(Integer.parseInt(model.getValueAt(i, 0).toString()));
             // Cantidad que sobra despues de la compra
-            Integer cantidadResultante = Integer.parseInt(producto.cantidad) - Integer.parseInt((String) model.getValueAt(i, 2));
+            Integer cantidadResultante = Integer.parseInt(producto.cantidad) - Integer.parseInt(String.valueOf( model.getValueAt(i, 2)));
             // Ahora guardar este resultado
             modeloProductos.actualizarCantidadProducto(Integer.parseInt(model.getValueAt(i, 0).toString()), cantidadResultante.toString());
         }
@@ -264,21 +266,21 @@ public class ControladorVentasCrear {
                 vistaVentasCrear.lblRealRow.setText(String.valueOf(realRow));
                 // Grabo los datos en el objeto cliente recibido como argumento.
                 vistaVentasCrear.lblIdProducto.setText(model.getValueAt(realRow, 0).toString());
-                vistaVentasCrear.txtProductoSeleccionado.setText((String) model.getValueAt(realRow, 1));
-                vistaVentasCrear.lblCantidadProducto.setText((String) model.getValueAt(realRow, 4));
-                vistaVentasCrear.lblCostoProducto.setText((String) model.getValueAt(realRow, 10));
+                vistaVentasCrear.txtProductoSeleccionado.setText(String.valueOf(model.getValueAt(realRow, 1)));
+                vistaVentasCrear.lblCantidadProducto.setText(String.valueOf( model.getValueAt(realRow, 4)));
+                vistaVentasCrear.lblCostoProducto.setText(String.valueOf( model.getValueAt(realRow, 10)));
                 String pre_fijo = vistaVentasCrear.lblPreciofijo.getText();
                 if(pre_fijo.equals("Ninguno")) {
-                    vistaVentasCrear.cbPrecio.addItem((String) model.getValueAt(realRow, 5));
-                    vistaVentasCrear.cbPrecio.addItem((String) model.getValueAt(realRow, 6));
+                    vistaVentasCrear.cbPrecio.addItem(String.valueOf( model.getValueAt(realRow, 5)));
+                    vistaVentasCrear.cbPrecio.addItem(String.valueOf( model.getValueAt(realRow, 6)));
                     if(per.equals("A")) {
-                        vistaVentasCrear.cbPrecio.addItem((String) model.getValueAt(realRow, 7));
-                        vistaVentasCrear.cbPrecio.addItem((String) model.getValueAt(realRow, 8));
-                        vistaVentasCrear.cbPrecio.addItem((String) model.getValueAt(realRow, 9));
+                        vistaVentasCrear.cbPrecio.addItem(String.valueOf( model.getValueAt(realRow, 7)));
+                        vistaVentasCrear.cbPrecio.addItem(String.valueOf( model.getValueAt(realRow, 8)));
+                        vistaVentasCrear.cbPrecio.addItem(String.valueOf( model.getValueAt(realRow, 9)));
                     }
                 } else {
                     int pre_fijo_number = Integer.parseInt(pre_fijo);
-                    vistaVentasCrear.cbPrecio.addItem((String) model.getValueAt(realRow, pre_fijo_number + 4));
+                    vistaVentasCrear.cbPrecio.addItem(String.valueOf( model.getValueAt(realRow, pre_fijo_number + 4)));
                 }
                 
                 vistaVentasCrear.txtCantidad.requestFocusInWindow();
@@ -348,8 +350,8 @@ public class ControladorVentasCrear {
         double SumaGananciaProductos = 0f;
         for (int i = 0; i < model.getRowCount(); i++) {
             // Conseguir todos los totales que se encuentra en la posicion 4, contando tb 0
-            SumaTotalProductos = SumaTotalProductos + Double.parseDouble((String)model.getValueAt(i, 4));
-            SumaGananciaProductos = SumaGananciaProductos + Double.parseDouble((String)model.getValueAt(i, 6));
+            SumaTotalProductos = SumaTotalProductos + Double.parseDouble(String.valueOf(model.getValueAt(i, 4)));
+            SumaGananciaProductos = SumaGananciaProductos + Double.parseDouble(String.valueOf(model.getValueAt(i, 6)));
         }
         double subTotal = SumaTotalProductos/1.18f;
         subTotal = redondearDecimales(subTotal,2);
@@ -473,15 +475,12 @@ public class ControladorVentasCrear {
     }
     
     // Copiado de internet
-    // http://www.aprenderaprogramar.com/index.php?option=com_content&view=article&id=960:java-redondear-a-2-o-mas-decimales-errores-precision-bigdecimal-roundingmode-biginteger-cu00907c&catid=58:curso-lenguaje-programacion-java-nivel-avanzado-i&Itemid=180
-    public static double redondearDecimales(double valorInicial, int numeroDecimales) {
-        double parteEntera, resultado;
-        resultado = valorInicial;
-        parteEntera = Math.floor(resultado);
-        resultado=(resultado-parteEntera)*Math.pow(10, numeroDecimales);
-        resultado=Math.round(resultado);
-        resultado=(resultado/Math.pow(10, numeroDecimales))+parteEntera;
-        return resultado;
+    // https://stackoverflow.com/questions/2808535/round-a-double-to-2-decimal-places
+    public static double redondearDecimales(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+        BigDecimal bd = new BigDecimal(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
     
     //Copiado de internet
